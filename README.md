@@ -44,9 +44,6 @@ Monitorowanie napięcia i poziomu naładowania akumulatora.
 battery.begin(36);                         // Inicjalizacja pomiaru baterii na pinie ADC
 float voltage = battery.getBatteryVoltage();   // Zwraca napięcie baterii w V (np. 3.85V)
 float percent = battery.getBatteryPercent();       // Zwraca poziom naładowania (0-100%)
-bool charging = battery.isCharging();   // Czy ładowanie trwa?
-bool low = battery.isLow(3.4);          // Czy poziom jest poniżej progu?
-String icon = battery.getStatusIcon();  // Zwraca ikonkę (🔋, ⚡, ❗)
 ```
 
 **Domyślne stałe napięcia (zdefiniowane w bibliotece):**
@@ -95,10 +92,11 @@ wifi.update();                           // Obsługa żądań HTTP
 
 ## 💡 Przykłady
 
-- `examples/BAT/BatteryMonitor.ino` – pomiar napięcia z optoizolatorem
-- `examples/WIFI/WifiClient.ino` – pobieranie JSON-a z internetu
-- `examples/WIFI/wifi_ap_custom_html/wifi_ap_custom_html.ino` – hotspot z custom HTML
-- `examples/BT/Chat.ino` – czat przez Bluetooth z kodem parowania
+- `examples/Serial/Serial.ino` – testowanie i debugowanie esp32
+- `examples/WIFI/wifi_client/wifi_client.ino` – pobieranie JSON-a z internetu
+- `examples/WIFI/wifi_ap/wifi_ap.ino` – hotspot z custom HTML
+- `examples/BT/Chat/Chat.ino` – czat przez Bluetooth z kodem parowania
+- `examples/BAT/Level/Level.ino` – poziom naładowania oraz informacje o stanie baterii
 
 ---
 
@@ -112,3 +110,5 @@ wifi.update();                           // Obsługa żądań HTTP
 ## 🧠 Autor
 
 Mateusz Lademann (Mati) – InGraw Co.
+
+## POWODZENIA
