@@ -40,7 +40,9 @@ float voltage = readVoltage();      // Zwraca napięcie na pinnie 36
 int adc = readADC();        // Zwraca wartość ADC(tylko do debugowania, raczej nie używane)
 ```
 
-**Domyślne stałe napięcia (zdefiniowane w bibliotece):**
+**Domyślne zmienne stałe(zdefiniowane w bibliotece):**
+- Pin baterii : 36
+- Bity ADC: 4095
 - Napięcie minimalne: 3.0V
 - Napięcie maksymalne: 4.2V
 - Wejście z optoizolatora: 1.5V – 2.1V skalowane na 3.0V – 4.2V
