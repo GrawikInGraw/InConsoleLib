@@ -72,7 +72,7 @@ String msg = BT.receiveMessage();  // Odczytaj otrzymaną wiadomość (jeśli pr
 ### Tryb klienta (ESP32 łączy się z siecią)
 
 ```cpp
-wifi.connectToWiFi("SSID", "PASS");      // Połącz z siecią WiFi
+wifi.connectToWiFi("SSID", "PASSWORD");      // Połącz z siecią WiFi
 bool ok = wifi.isConnected();            // Sprawdź połączenie
 String ip = wifi.getLocalIP().toString();           // Pobierz IP
 String json = wifi.get("http://example.com");         // Pobierz dane z internetu
@@ -83,11 +83,23 @@ String json = wifi.get("http://example.com");         // Pobierz dane z internet
 ```cpp
 wifi.startAP("Nazwa", "12345678");       // Utwórz własny hotspot
 wifi.setHTML("<h1>Hello</h1>");          // Ustaw zawartość HTML
-// W loopie:
 wifi.update();                           // Obsługa żądań HTTP
 ```
 
 ---
+
+## 📡 InConsoleSD
+
+obsługa karty SD czytywania i zapisywania plików.
+
+```cpp
+SD.begin();                      // Inicjalizacja SD
+SD.writeFile("/example.txt", "To jest test zapisu!");      // Zapis pliku i zawartości na kartę SD
+String content = SD.readFile("/example.txt");         // Odczytaj zawartość pliku z karty SD
+SD.appendFile("/example.txt", "\nDopisany tekst.");            // Dopisanie treści do pliku
+SD.deleteFile("/delete_me.txt");    // Usuwanie pliku
+bool save = SD.exists("/delete_me.txt");     // Czy plik na karcie SD istnieje?
+```
 
 ## 💡 Przykłady
 
