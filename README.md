@@ -111,6 +111,7 @@ if (SD.loadBMP("/image.bmp", &bmpData, &bmpSize)) {
 - `wifi_ap.ino` – lokalny serwer z HTML
 - `Chat.ino` – czat BT z parowaniem
 - `Level.ino` – poziom baterii + napięcie
+- `SD.ino` – odczyt i zapis na karcie SD
 
 ---
 
