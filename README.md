@@ -17,6 +17,8 @@ Zawiera moduły: ekran, joystick, buzzer, przyciski, Bluetooth, WiFi, debug i mo
 
 ## 🪛 InConsoleDebug
 
+Debugowanie i diagnozowanie problemów.
+
 ```cpp
 serial.begin(9600);         // Inicjalizacja portu szeregowego
 serial.send("Witaj");       // Wysyła tekst bez nowej linii
@@ -51,11 +53,12 @@ int adc = readADC();        // Zwraca wartość ADC(tylko do debugowania, raczej
 
 ## 📡 InConsoleBT
 
-Bluetooth z funkcją parowania przez wspólny kod:
+Bluetooth z funkcją parowania przez wspólny kod.
 
 ```cpp
 BT.begin();                      // Inicjalizacja Bluetooth
-BT.pairDevices("2137");         // Ustaw kod parowania
+BT.update();                    // Pętla Bluetooth
+BT.pairDevices("1234");         // Ustaw kod parowania
 BT.waitForPairing();            // Oczekiwanie na drugie urządzenie
 bool paired = BT.isPaired();    // Czy urządzenia są połączone?
 BT.sendMessage("test");        // Wyślij wiadomość do drugiego ESP32
