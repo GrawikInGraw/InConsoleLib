@@ -41,9 +41,11 @@ String input = serial.readInput(); // Wczytuje całą linię z Serial (blokując
 Monitorowanie napięcia i poziomu naładowania akumulatora.
 
 ```cpp
-battery.begin(36);                         // Inicjalizacja pomiaru baterii na pinie ADC
+battery.begin();                         // Inicjalizacja pomiaru baterii na pinie ADC
 float voltage = battery.getBatteryVoltage();   // Zwraca napięcie baterii w V (np. 3.85V)
 float percent = battery.getBatteryPercent();       // Zwraca poziom naładowania (0-100%)
+float voltage = readVoltage();      // Zwraca napięcie na pinnie 36
+int adc = readADC();        // Zwraca wartość ADC(tylko do debugowania, raczej nie używane)
 ```
 
 **Domyślne stałe napięcia (zdefiniowane w bibliotece):**
