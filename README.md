@@ -20,7 +20,7 @@ Stworzona z myślą o młodych konstruktorach, graczach i hobbystach elektroniki
 ## 🧰 InConsoleDebug – debug dla każdego
 
 ```cpp
-serial.begin(9600);                // Start Serial
+serial.begin(115200);                // Start Serial
 serial.send("Witaj");              // Wyslij tekst bez nowej linii
 serial.sendln("Debug OK");         // Tekst z nową linią
 serial.sendln(1234);                // Liczba z nową linią
