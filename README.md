@@ -1,125 +1,132 @@
 # InConsoleLib
 
-Biblioteka do obsługi zestawu InConsole na ESP32.
-Zawiera moduły: ekran, joystick, buzzer, przyciski, Bluetooth, WiFi, debug i monitorowanie baterii.
+📦 **Biblioteka do obsługi zestawu InConsole na ESP32**
+
+Stworzona z myślą o młodych konstruktorach, graczach i hobbystach elektroniki. Łatwa, przejrzysta i kompletna biblioteka do Twojego zestawu edukacyjnego z ESP32.
 
 ---
 
-## 📦 Moduły biblioteki
+## 🚀 Moduły w bibliotece
 
-- **InConsole** – podstawowa inicjalizacja zestawu
-- **InConsoleDebug** – łatwa obsługa komunikacji debug przez Serial
-- **InConsoleBT** – komunikacja Bluetooth z funkcją parowania
-- **InConsoleWifi** – tryb klienta WiFi oraz Access Point + prosty serwer
-- **InConsoleBAT** – monitorowanie napięcia i poziomu naładowania baterii
+- 🧠 `InConsole` – inicjalizacja zestawu
+- 🧰 `InConsoleDebug` – szybkie debugowanie przez Serial
+- 📡 `InConsoleBT` – komunikacja Bluetooth z funkcją parowania
+- 🌐 `InConsoleWifi` – tryb klienta WiFi i Access Point
+- 🔋 `InConsoleBAT` – monitorowanie napięcia baterii
+- 💾 `InConsoleSD` – odczyt/zapis plików i wczytywanie BMP z SD
 
 ---
 
-## 🪛 InConsoleDebug
-
-Debugowanie i diagnozowanie problemów.
+## 🧰 InConsoleDebug – debug dla każdego
 
 ```cpp
-serial.begin(9600);         // Inicjalizacja portu szeregowego
-serial.send("Witaj");       // Wysyła tekst bez nowej linii
-serial.sendln("Debug OK");  // Wysyła tekst z nową linią
-serial.sendln(1234);        // Wysyła liczbę z nową linią
-serial.send("1234");       // Wysyła liczbę bez nowej linii
-String input = serial.readInput(); // Wczytuje całą linię z Serial (blokujące)
+serial.begin(9600);                // Start Serial
+serial.send("Witaj");              // Wyslij tekst bez nowej linii
+serial.sendln("Debug OK");         // Tekst z nową linią
+serial.sendln(1234);                // Liczba z nową linią
+String input = serial.readInput();  // Wczytaj linię z Serial (blokujące)
 ```
 
 ---
 
-## 🔋 InConsoleBAT
-
-Monitorowanie napięcia i poziomu naładowania akumulatora.
+## 🔋 InConsoleBAT – bateria pod kontrolą
 
 ```cpp
-battery.begin();                         // Inicjalizacja pomiaru baterii na pinie ADC
-float voltage = battery.getBatteryVoltage();   // Zwraca napięcie baterii w V (np. 3.85V)
-float percent = battery.getBatteryPercent();       // Zwraca poziom naładowania (0-100%)
-float voltage = readVoltage();      // Zwraca napięcie na pinnie 36
-int adc = readADC();        // Zwraca wartość ADC(tylko do debugowania, raczej nie używane)
+battery.begin();                      // Start ADC
+float voltage = battery.getBatteryVoltage();   // Napięcie (V)
+float percent = battery.getBatteryPercent();   // Poziom naładowania (%)
+float voltage = readVoltage();                 // Surowe napięcie (z ADC)
+int adc = readADC();                           // Surowa wartość ADC
 ```
 
-**Domyślne zmienne stałe(zdefiniowane w bibliotece):**
-- Pin baterii : 36
-- Bity ADC: 4095
-- Napięcie minimalne: 3.0V
-- Napięcie maksymalne: 4.2V
-- Wejście z optoizolatora: 1.5V – 2.1V skalowane na 3.0V – 4.2V
+**Stałe wbudowane:**
+- Pin ADC: 36
+- Zakres: 0–4095 (12-bit)
+- Napięcie skalowane z PC817: 1.5–2.1V → 3.0–4.2V
 
 ---
 
-## 📡 InConsoleBT
-
-Bluetooth z funkcją parowania przez wspólny kod.
+## 📡 InConsoleBT – Bluetooth parowanie i czat
 
 ```cpp
-BT.begin();                      // Inicjalizacja Bluetooth
-BT.update();                    // Pętla Bluetooth
-BT.pairDevices("1234");         // Ustaw kod parowania
-BT.waitForPairing();            // Oczekiwanie na drugie urządzenie
-bool paired = BT.isPaired();    // Czy urządzenia są połączone?
-BT.sendMessage("test");        // Wyślij wiadomość do drugiego ESP32
-String msg = BT.receiveMessage();  // Odczytaj otrzymaną wiadomość (jeśli przyszła)
+BT.begin();                        // Start BT
+BT.update();                       // Pętla BT
+BT.pairDevices("1234");           // Kod parowania
+BT.waitForPairing();              // Czekanie na drugie ESP
+bool ok = BT.isPaired();          // Czy połączono?
+BT.sendMessage("Hej!");          // Wyślij wiadomość
+String msg = BT.receiveMessage(); // Odbierz wiadomość
 ```
 
 ---
 
-## 🌐 InConsoleWifi
+## 🌐 InConsoleWifi – połącz się z siecią lub zostań routerem
 
-### Tryb klienta (ESP32 łączy się z siecią)
+### Tryb klienta WiFi
 
 ```cpp
-wifi.connectToWiFi("SSID", "PASSWORD");      // Połącz z siecią WiFi
-bool ok = wifi.isConnected();            // Sprawdź połączenie
-String ip = wifi.getLocalIP().toString();           // Pobierz IP
-String json = wifi.get("http://example.com");         // Pobierz dane z internetu
+wifi.connectToWiFi("SSID", "PASS");     // Połącz z siecią
+bool ok = wifi.isConnected();            // Czy połączenie działa?
+String ip = wifi.getLocalIP().toString(); // IP urządzenia
+String json = wifi.get("http://example.com"); // Pobierz JSON
 ```
 
-### Tryb Access Point + Serwer
+### Tryb Access Point (hotspot z serwerem)
 
 ```cpp
-wifi.startAP("Nazwa", "12345678");       // Utwórz własny hotspot
-wifi.setHTML("<h1>Hello</h1>");          // Ustaw zawartość HTML
-wifi.update();                           // Obsługa żądań HTTP
+wifi.startAP("InConsole", "12345678"); // Stwórz sieć
+wifi.setHTML("<h1>Witaj!</h1>");       // HTML strony
+wifi.update();                          // Obsługa zapytań HTTP
 ```
 
 ---
 
-## 📡 InConsoleSD
-
-obsługa karty SD czytywania i zapisywania plików.
+## 💾 InConsoleSD – obsługa karty SD
 
 ```cpp
-SD.begin();                      // Inicjalizacja SD
-SD.writeFile("/example.txt", "To jest test zapisu!");      // Zapis pliku i zawartości na kartę SD
-String content = SD.readFile("/example.txt");         // Odczytaj zawartość pliku z karty SD
-SD.appendFile("/example.txt", "\nDopisany tekst.");            // Dopisanie treści do pliku
-SD.deleteFile("/delete_me.txt");    // Usuwanie pliku
-bool save = SD.exists("/delete_me.txt");     // Czy plik na karcie SD istnieje?
+SD.begin();                                     // Start SD
+SD.writeFile("/test.txt", "Dane zapisu");       // Zapisz plik
+String content = SD.readFile("/test.txt");     // Odczytaj plik
+SD.appendFile("/test.txt", "\nDopisane!");      // Dopisz do pliku
+SD.deleteFile("/usun.txt");                    // Usuń plik
+bool isThere = SD.exists("/test.txt");         // Czy plik istnieje?
 ```
+
+📷 Wczytaj BMP do tablicy:
+```cpp
+uint8_t* bmpData;
+size_t bmpSize;
+if (SD.loadBMP("/image.bmp", &bmpData, &bmpSize)) {
+  // dane są dostępne w bmpData, bmpSize
+  free(bmpData); // nie zapomnij zwolnić pamięci!
+}
+```
+
+---
 
 ## 💡 Przykłady
 
-- `examples/Serial/Serial.ino` – testowanie i debugowanie esp32
-- `examples/WIFI/wifi_client/wifi_client.ino` – pobieranie JSON-a z internetu
-- `examples/WIFI/wifi_ap/wifi_ap.ino` – hotspot z custom HTML
-- `examples/BT/Chat/Chat.ino` – czat przez Bluetooth z kodem parowania
-- `examples/BAT/Level/Level.ino` – poziom naładowania oraz informacje o stanie baterii
+- `Serial.ino` – test komunikacji debug
+- `wifi_client.ino` – pobieranie JSON z internetu
+- `wifi_ap.ino` – lokalny serwer z HTML
+- `Chat.ino` – czat BT z parowaniem
+- `Level.ino` – poziom baterii + napięcie
 
 ---
 
-## 📁 Instalacja
+## 🧰 Instalacja
 
-1. Skopiuj folder `InConsoleLib` do katalogu `Arduino/libraries`
-2. Upewnij się, że używasz ESP32 i masz wgrany sterownik
+1. Pobierz bibliotekę i skopiuj folder `InConsoleLib` do `Arduino/libraries`
+2. Upewnij się, że masz zainstalowaną platformę ESP32
+3. Restart Arduino IDE
 
 ---
 
-## 🧠 Autor
+## 👨‍💻 Autor
 
-Mateusz Lademann (Mati) – InGraw Co.
+Mateusz Lademann (Mati) – twórca InGraw Co.
 
-## POWODZENIA
+---
+
+📈 *Zaprojektowane z myślą o rozwoju – ucz się, koduj, baw się i twórz przyszłość z InConsole!*
+
