@@ -15,15 +15,6 @@ Zawiera moduły: ekran, joystick, buzzer, przyciski, Bluetooth, WiFi, debug i mo
 
 ---
 
-## ✅ InConsole
-
-```cpp
-InConsole.begin();          // Inicjalizacja zestawu (LCD, joystick, buzzer, itd.)
-InConsole.update();         // Aktualizacja stanu joysticka i przycisków
-```
-
----
-
 ## 🪛 InConsoleDebug
 
 ```cpp
@@ -31,6 +22,7 @@ serial.begin(9600);         // Inicjalizacja portu szeregowego
 serial.send("Witaj");       // Wysyła tekst bez nowej linii
 serial.sendln("Debug OK");  // Wysyła tekst z nową linią
 serial.sendln(1234);        // Wysyła liczbę z nową linią
+serial.send("1234");       // Wysyła liczbę bez nowej linii
 String input = serial.readInput(); // Wczytuje całą linię z Serial (blokujące)
 ```
 
