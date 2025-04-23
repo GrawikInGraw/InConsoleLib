@@ -7,7 +7,7 @@ Zawiera moduły: ekran, joystick, buzzer, przyciski, Bluetooth, WiFi, debug i mo
 
 ## 📦 Moduły biblioteki
 
-- **InConsole** – podstawowa inicjalizacja i update zestawu
+- **InConsole** – podstawowa inicjalizacja zestawu
 - **InConsoleDebug** – łatwa obsługa komunikacji debug przez Serial
 - **InConsoleBT** – komunikacja Bluetooth z funkcją parowania
 - **InConsoleWifi** – tryb klienta WiFi oraz Access Point + prosty serwer
