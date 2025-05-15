@@ -6,26 +6,20 @@ Stworzona z myślą o młodych konstruktorach, graczach i hobbystach elektroniki
 
 ---
 
-## 🚀 Moduły w bibliotece
+## 🚀 Moduły dostępne w InConsole
 
-- 🧠 `InConsole` – inicjalizacja zestawu
-- 🧰 `InConsoleDebug` – szybkie debugowanie przez Serial
-- 📡 `InConsoleBT` – komunikacja Bluetooth z funkcją parowania
-- 🌐 `InConsoleWifi` – tryb klienta WiFi i Access Point
-- 🔋 `InConsoleBAT` – monitorowanie napięcia baterii
-- 💾 `InConsoleSD` – odczyt/zapis plików i wczytywanie BMP z SD
-
----
-
-## 🧰 InConsoleDebug – debug dla każdego
-
-```cpp
-serial.begin(115200);                // Start Serial
-serial.send("Witaj");              // Wyslij tekst bez nowej linii
-serial.sendln("Debug OK");         // Tekst z nową linią
-serial.sendln(1234);                // Liczba z nową linią
-String input = serial.readInput();  // Wczytaj linię z Serial (blokujące)
-```
+| Nazwa Modułu                | Opis                                   |
+|-----------------------------|---------------------------------------|
+| 🧠 `InConsole`              | Inicjalizacja zestawu i podstawowe funkcje |
+| 📡 `InConsoleBT`            | Komunikacja Bluetooth z funkcją parowania  |
+| 🌐 `InConsoleWifi`          | Tryb klienta WiFi i Access Point            |
+| 🔋 `InConsoleBAT`           | Monitorowanie napięcia baterii               |
+| 💾 `InConsoleSD`            | Odczyt i zapis plików, wczytywanie BMP z SD |
+| ⏰ `InConsoleRTC`           | Obsługa zegara czasu rzeczywistego (RTC)    |
+| 🖥️ `InConsoleTFT`          | Sterowanie wyświetlaczem TFT                   |
+| 🔔 `InConsoleBuzzer`        | Sterowanie buzzerem i dźwiękami               |
+| 🎛️ `InConsoleButtons`      | Obsługa przycisków                             |
+| 🎮 `InConsoleJoystick`     | Obsługa joysticka analogowego                   |
 
 ---
 
