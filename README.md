@@ -1,127 +1,169 @@
+
 # InConsoleLib
 
 📦 **Biblioteka do obsługi zestawu InConsole na ESP32**
 
-Stworzona z myślą o młodych konstruktorach, graczach i hobbystach elektroniki. Łatwa, przejrzysta i kompletna biblioteka do Twojego zestawu edukacyjnego z ESP32.
+Dedykowana dla młodych konstruktorów, graczy i pasjonatów elektroniki, którzy chcą mieć kompletną i czytelną bibliotekę do swojego zestawu edukacyjnego z ESP32 — prosto, bez kombinacji, a jednocześnie elastycznie i solidnie.
 
 ---
 
-## 🚀 Moduły dostępne w InConsole
+## 🚀 Co masz w InConsoleLib?
 
-| Nazwa Modułu                | Opis                                   |
-|-----------------------------|---------------------------------------|
-| 🧠 `InConsole`              | Inicjalizacja zestawu i podstawowe funkcje |
-| 📡 `InConsoleBT`            | Komunikacja Bluetooth z funkcją parowania  |
-| 🌐 `InConsoleWifi`          | Tryb klienta WiFi i Access Point            |
-| 🔋 `InConsoleBAT`           | Monitorowanie napięcia baterii               |
-| 💾 `InConsoleSD`            | Odczyt i zapis plików, wczytywanie BMP z SD |
-| ⏰ `InConsoleRTC`           | Obsługa zegara czasu rzeczywistego (RTC)    |
-| 🖥️ `InConsoleTFT`          | Sterowanie wyświetlaczem TFT                   |
-| 🔔 `InConsoleBuzzer`        | Sterowanie buzzerem i dźwiękami               |
-| 🎛️ `InConsoleButtons`      | Obsługa przycisków                             |
-| 🎮 `InConsoleJoystick`     | Obsługa joysticka analogowego                   |
+| Moduł / Klasa     | Opis                                                           |
+|-------------------|----------------------------------------------------------------|
+| 🧠 `InConsole`    | Podstawowa klasa inicjalizująca zestaw, obsługa przycisków, buzzer, TFT i SD |
+
+> To jest Twój główny sterownik — pełna obsługa sprzętu w jednym miejscu.
 
 ---
 
-## 🔋 InConsoleBAT – bateria pod kontrolą
+## 📋 Wymagania bibliotek zewnętrznych
+
+Przed użyciem `InConsoleLib` musisz mieć zainstalowane:
+
+- **Adafruit GFX**  
+  https://github.com/adafruit/Adafruit-GFX-Library  
+  Podstawa do wyświetlania grafiki na TFT.
+  
+- **Adafruit ST7735**  
+  https://github.com/adafruit/Adafruit-ST7735-Library  
+  Sterownik do Twojego wyświetlacza TFT 1.8" (ST7735).
+  
+- **SPI** (jest częścią ESP32 Arduino Core)  
+- **SD** (również część standardowej biblioteki Arduino)
+
+---
+
+## 🛠️ Funkcje i API klasy `InConsole`
+
+### 1. `void begin();`  
+Inicjalizuje cały zestaw:  
+- UART (Serial 115200)  
+- Konfiguracja pinów przycisków i buzzera  
+- Uruchomienie SPI dla TFT i SD (dwa różne SPI!)  
+- Inicjalizacja wyświetlacza TFT (Adafruit_ST7735)  
+- Inicjalizacja karty SD, sprawdzenie dostępności i komunikat na TFT oraz Serialu
+
+---
+
+### 2. Obsługa przycisków
+
+Wszystkie przyciski działają na zasadzie wykrywania **pojedynczego naciśnięcia** (krawędź opadająca):
 
 ```cpp
-battery.begin();                      // Start ADC
-float voltage = battery.getBatteryVoltage();   // Napięcie (V)
-float percent = battery.getBatteryPercent();   // Poziom naładowania (%)
-float voltage = readVoltage();                 // Surowe napięcie (z ADC)
-int adc = readADC();                           // Surowa wartość ADC
+bool readButtonA();     // przycisk A
+bool readButtonB();     // przycisk B
+bool readStart();       // przycisk Start
+bool readSelect();      // przycisk Select
 ```
 
-**Stałe wbudowane:**
-- Pin ADC: 36
-- Zakres: 0–4095 (12-bit)
-- Napięcie skalowane z PC817: 1.5–2.1V → 3.0–4.2V
+**Uwaga:** Przycisk zwraca `true` tylko w momencie wykrycia naciśnięcia, nie trzyma stanu.
 
 ---
 
-## 📡 InConsoleBT – Bluetooth parowanie i czat
+### 3. Buzzer
+
+Prosta funkcja beep:
 
 ```cpp
-BT.begin();                        // Start BT
-BT.update();                       // Pętla BT
-BT.pairDevices("1234");           // Kod parowania
-BT.waitForPairing();              // Czekanie na drugie ESP
-bool ok = BT.isPaired();          // Czy połączono?
-BT.sendMessage("Hej!");          // Wyślij wiadomość
-String msg = BT.receiveMessage(); // Odbierz wiadomość
-```
-
----
-
-## 🌐 InConsoleWifi – połącz się z siecią lub zostań routerem
-
-### Tryb klienta WiFi
-
-```cpp
-wifi.connectToWiFi("SSID", "PASS");     // Połącz z siecią
-bool ok = wifi.isConnected();            // Czy połączenie działa?
-String ip = wifi.getLocalIP().toString(); // IP urządzenia
-String json = wifi.get("http://example.com"); // Pobierz JSON
-```
-
-### Tryb Access Point (hotspot z serwerem)
-
-```cpp
-wifi.startAP("InConsole", "12345678"); // Stwórz sieć
-wifi.setHTML("<h1>Witaj!</h1>");       // HTML strony
-wifi.update();                          // Obsługa zapytań HTTP
+void beep(int duration_ms);  // Dźwięk buzzera na określony czas (ms)
 ```
 
 ---
 
-## 💾 InConsoleSD – obsługa karty SD
+### 4. Status karty SD
 
 ```cpp
-SD.begin();                                     // Start SD
-SD.writeFile("/test.txt", "Dane zapisu");       // Zapisz plik
-String content = SD.readFile("/test.txt");     // Odczytaj plik
-SD.appendFile("/test.txt", "\nDopisane!");      // Dopisz do pliku
-SD.deleteFile("/usun.txt");                    // Usuń plik
-bool isThere = SD.exists("/test.txt");         // Czy plik istnieje?
+bool SD_ok();  // true jeśli karta SD jest gotowa i dostępna
 ```
 
-📷 Wczytaj BMP do tablicy:
+---
+
+### 5. Wyświetlacz TFT
+
+Wykorzystywany jest sterownik `Adafruit_ST7735` podłączony do SPI HSPI na pinach:
+
+| Funkcja | Pin ESP32 |
+|---------|-----------|
+| TFT_CS  | 16        |
+| TFT_RST | 4         |
+| TFT_DC  | 2         |
+| TFT_SCLK| 21        |
+| TFT_MOSI| 22        |
+
+> Wyświetlacz inicjalizowany jest z rotacją 3 i czarnym tłem.
+
+---
+
+### 6. Karta SD
+
+SD działa na SPI VSPI z pinami:
+
+| Funkcja | Pin ESP32 |
+|---------|-----------|
+| SD_CS   | 5         |
+| SD_MOSI | 23        |
+| SD_MISO | 19        |
+| SD_SCLK | 18        |
+
+---
+
+## 💡 Przykładowe użycie
+
 ```cpp
-uint8_t* bmpData;
-size_t bmpSize;
-if (SD.loadBMP("/image.bmp", &bmpData, &bmpSize)) {
-  // dane są dostępne w bmpData, bmpSize
-  free(bmpData); // nie zapomnij zwolnić pamięci!
+#include "ic.h"
+
+void setup() {
+  ic.begin();
+
+  if(ic.SD_ok()) {
+    Serial.println("Karta SD gotowa!");
+  } else {
+    Serial.println("Brak karty SD!");
+  }
+}
+
+void loop() {
+  if(ic.readButtonA()) {
+    ic.beep(100);  // sygnał buzzera po naciśnięciu A
+  }
 }
 ```
 
 ---
 
-## 💡 Przykłady
+## 📚 Instalacja
 
-- `Serial.ino` – test komunikacji debug
-- `wifi_client.ino` – pobieranie JSON z internetu
-- `wifi_ap.ino` – lokalny serwer z HTML
-- `Chat.ino` – czat BT z parowaniem
-- `Level.ino` – poziom baterii + napięcie
-- `SD.ino` – odczyt i zapis na karcie SD
-
----
-
-## 🧰 Instalacja
-
-1. Pobierz bibliotekę i skopiuj folder `InConsoleLib` do `Arduino/libraries`
-2. Upewnij się, że masz zainstalowaną platformę ESP32
-3. Restart Arduino IDE
+1. Pobierz bibliotekę `InConsoleLib` i umieść folder w `Arduino/libraries`.
+2. Zainstaluj wymagane biblioteki **Adafruit GFX** i **Adafruit ST7735** przez Menadżera bibliotek Arduino.
+3. Upewnij się, że masz zainstalowaną platformę ESP32 (esp32/arduino).
+4. Uruchom ponownie Arduino IDE.
+5. Podłącz ESP32 i skompiluj swoje projekty z `#include "ic.h"`.
 
 ---
 
-## 👨‍💻 Autor
+## 🔧 Szczegóły implementacji i tipy
 
-Mateusz Lademann (Mati) – twórca InGraw Co.
+- **Dwa SPI:**  
+  - TFT używa HSPI (piny 21/22/16)  
+  - SD używa VSPI (piny 23/19/18/5)  
+  To jest kluczowe, bo mieszanie może powodować błędy komunikacji.
+
+- **Przyciski:** Są podciągnięte wewnętrznie (INPUT_PULLUP) – stan niskiego logicznego oznacza naciśnięcie.
+
+- **Buzzer:** prosty on/off na pin 33. Możesz rozbudować o PWM jeśli chcesz.
+
+- **Wyświetlacz:** Ustawiony na rotację 3, by obraz był dobrze orientowany względem fizycznego montażu.
+
+- **SD:** Sprawdzaj stan przed odczytem/zapisem. Brak karty wyświetlany jest na TFT czerwonym kolorem.
 
 ---
 
-📈 *Zaprojektowane z myślą o rozwoju – ucz się, koduj, baw się i twórz przyszłość z InConsole!*
+## 👨‍💻 Autor i rozwój
 
+Mateusz Lademann (Mati) – twórca InGraw Co. i InConsole.  
+Projektuj z głową, ucz się na błędach i buduj przyszłość z InConsole!  
+
+---
+
+📈 *Z InConsole nauczysz się lutowania, programowania i elektroniki krok po kroku – pełna kontrola sprzętu, zero magii, tylko jasny kod i działanie.*
