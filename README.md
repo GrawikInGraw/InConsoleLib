@@ -29,8 +29,13 @@ Przed użyciem `InConsoleLib` musisz mieć zainstalowane:
   https://github.com/adafruit/Adafruit-ST7735-Library  
   Sterownik do Twojego wyświetlacza TFT 1.8" (ST7735).
   
-- **SPI** (jest częścią ESP32 Arduino Core)  
-- **SD** (również część standardowej biblioteki Arduino)
+- Upewnij się również, że masz zainstalowaną platformę **esp32** w preferencjach Arduino IDE:
+  https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+  
+  tak powinno wyglądać twoje okienko w ustawieniach:
+
+  ![image](https://github.com/user-attachments/assets/3124703d-91ae-4e58-8b47-1f59a32d031e)
+
 
 ---
 
