@@ -113,6 +113,55 @@ SD działa na SPI VSPI z pinami:
 
 ---
 
+## 🎨 Korzystanie z Adafruit GFX w InConsoleLib
+
+Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc skupimy się na tym, jak efektywnie korzystać z podstawowych funkcji rysowania i wyświetlania tekstu, które da Ci Adafruit GFX.
+
+### Kolory
+
+- Używaj 16-bitowych kolorów w formacie RGB565, np.:
+  - `ST77XX_BLACK` — czarny (tło domyślne)
+  - `ST77XX_WHITE` — biały (tekst, elementy)
+  - `ST77XX_RED`, `ST77XX_GREEN`, `ST77XX_BLUE` — podstawowe kolory
+  - Możesz tworzyć własne kolory przez kombinację RGB, np. `ic.tft.color565(255, 100, 0)`
+
+### Tekst
+
+- Funkcje do wyświetlania tekstu:
+  ```cpp
+  ic.tft.setCursor(x, y);         // ustawia pozycję tekstu (piksele)
+  ic.tft.setTextColor(color);     // ustawia kolor tekstu (opcjonalnie z tłem)
+  ic.tft.setTextSize(size);       // skaluje rozmiar czcionki (1..n)
+  ic.tft.print("Twój tekst");     // rysuje tekst na ekranie
+  ```
+- Pamiętaj, że tekst jest rysowany od aktualnej pozycji kursora.
+
+### Rysowanie kształtów
+
+- Linie i kształty do szybkiego GUI:
+  ```cpp
+  ic.tft.drawLine(x0, y0, x1, y1, color);          // linia
+  ic.tft.drawRect(x, y, width, height, color);     // prostokąt
+  ic.tft.fillRect(x, y, width, height, color);     // wypełniony prostokąt
+  ic.tft.drawCircle(x, y, r, color);                // okrąg
+  ic.tft.fillCircle(x, y, r, color);                // wypełniony okrąg
+  ```
+  
+### Czyszczenie ekranu
+
+- Szybkie czyszczenie:
+  ```cpp
+  ic.tft.fillScreen(ST77XX_BLACK);
+  ```
+
+---
+
+### Dodatkowe tipy
+
+- Pamiętaj aby przed `tft` dodać `ic`.
+- Kolory i pozycje miej na uwadze względem rozdzielczości 128x160 px.
+- Optymalizuj rysowanie, minimalizując niepotrzebne czyszczenia i rysowanie dużych elementów na nowo.
+
 ## 💡 Przykładowe użycie
 
 ```cpp
