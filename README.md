@@ -21,14 +21,13 @@ Dedykowana dla młodych konstruktorów, graczy i pasjonatów elektroniki, którz
 
 Przed użyciem `InConsoleLib` musisz mieć zainstalowane:
 
-- **Adafruit GFX**  
-  https://github.com/adafruit/Adafruit-GFX-Library  
-  Podstawa do wyświetlania grafiki na TFT.
+- **TFT_eSPI**  
+  https://github.com/Bodmer/TFT_eSPI  
+  Wydajna biblioteka graficzna dla wyświetlaczy TFT, używana zamiast Adafruit ST7735 i GFX.
   
-- **Adafruit ST7735**  
-  https://github.com/adafruit/Adafruit-ST7735-Library  
-  Sterownik do Twojego wyświetlacza TFT 1.8" (ST7735).
-  
+  **Biblioteka TFT_eSPI jest używana w tym projekcie zgodnie z licencją MIT.
+  Pełna treść licencji dostępna jest w repozytorium autora!**
+
 - Upewnij się również, że masz zainstalowaną platformę **esp32** w preferencjach Arduino IDE:
   https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
   
@@ -113,9 +112,9 @@ SD działa na SPI VSPI z pinami:
 
 ---
 
-## 🎨 Korzystanie z Adafruit GFX w InConsoleLib
+## 🎨 Korzystanie z TFT_eSPI w InConsoleLib
 
-Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc skupimy się na tym, jak efektywnie korzystać z podstawowych funkcji rysowania i wyświetlania tekstu, które da Ci Adafruit GFX.
+Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc skupimy się na tym, jak efektywnie korzystać z podstawowych funkcji rysowania i wyświetlania tekstu, które da Ci TFT_eSPI.
 
 ### Kolory
 
@@ -189,10 +188,11 @@ void loop() {
 ## 📚 Instalacja
 
 1. Pobierz bibliotekę `InConsoleLib` i umieść folder w `Arduino/libraries`.
-2. Zainstaluj wymagane biblioteki **Adafruit GFX** i **Adafruit ST7735** przez Menadżera bibliotek Arduino.
-3. Upewnij się, że masz zainstalowaną platformę ESP32 (esp32/arduino).
-4. Uruchom ponownie Arduino IDE.
-5. Podłącz ESP32 i skompiluj swoje projekty z `#include "ic.h"`.
+2. Zainstaluj wymagane bibliotekę **TFT_eSPI** przez Menadżera bibliotek Arduino.
+3. 
+4. Upewnij się, że masz zainstalowaną platformę ESP32 (esp32/arduino).
+5. Uruchom ponownie Arduino IDE.
+6. Podłącz ESP32 i skompiluj swoje projekty z `#include "ic.h"`.
 
 ---
 
@@ -219,5 +219,31 @@ Mateusz Lademann (Mati) – twórca InGraw Co. i InConsole.
 Projektuj z głową, ucz się na błędach i buduj przyszłość z InConsole!  
 
 ---
+
+# Licencja
+
+Ten projekt jest udostępniany na licencji **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+
+Oznacza to, że:
+
+- **możesz** kopiować, modyfikować, rozpowszechniać i tworzyć na bazie tego projektu,
+- **musisz** podać autora: *Mateusz Lademann (InGraw Co.)*,
+- **nie możesz** używać tego projektu do celów komercyjnych ani sprzedawać go.
+
+🔗 Pełny tekst licencji dostępny jest pod adresem:  
+[https://creativecommons.org/licenses/by-nc/4.0/deed.pl](https://creativecommons.org/licenses/by-nc/4.0/deed.pl)
+
+---
+
+## Przykład prawidłowego oznaczenia autora
+
+> Na podstawie projektu autorstwa Mateusza Lademanna (InGraw Co.)  
+> Źródło: https://github.com/InGraw-Co/InConsoleLib  
+> Licencja: CC BY-NC 4.0
+
+---
+
+[![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 
 📈 *Z InConsole nauczysz się lutowania, programowania i elektroniki krok po kroku – pełna kontrola sprzętu, zero magii, tylko jasny kod i działanie.*
