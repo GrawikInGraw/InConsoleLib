@@ -81,9 +81,16 @@ void beep(int duration_ms);  // Dźwięk buzzera na określony czas (ms)
 bool SD_ok();  // true jeśli karta SD jest gotowa i dostępna
 ```
 
+### 5. Bateria
+
+```cpp
+float readBatteryVoltage();                    // Napięcie baterii
+int batteryVoltageToPercent(float voltage);    // Procent naładowania baterii
+```
+
 ---
 
-### 5. Wyświetlacz TFT
+### 6. Wyświetlacz TFT
 
 Wykorzystywany jest sterownik `TFT_eSPI` podłączony do SPI HSPI na pinach:
 
@@ -99,7 +106,7 @@ Wykorzystywany jest sterownik `TFT_eSPI` podłączony do SPI HSPI na pinach:
 
 ---
 
-### 6. Karta SD
+### 7. Karta SD
 
 SD działa na SPI VSPI z pinami:
 
