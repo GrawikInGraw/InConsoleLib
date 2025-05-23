@@ -24,5 +24,3 @@
 #define LOAD_FONT7
 #define LOAD_FONT8
 #define LOAD_GFXFF
-
-
