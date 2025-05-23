@@ -85,7 +85,7 @@ bool SD_ok();  // true jeśli karta SD jest gotowa i dostępna
 
 ### 5. Wyświetlacz TFT
 
-Wykorzystywany jest sterownik `Adafruit_ST7735` podłączony do SPI HSPI na pinach:
+Wykorzystywany jest sterownik `TFT_eSPI` podłączony do SPI HSPI na pinach:
 
 | Funkcja | Pin ESP32 |
 |---------|-----------|
