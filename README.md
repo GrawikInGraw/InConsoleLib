@@ -24,6 +24,7 @@ Przed użyciem `InConsoleLib` musisz mieć zainstalowane:
 - **TFT_eSPI**  
   https://github.com/Bodmer/TFT_eSPI  
   Wydajna biblioteka graficzna dla wyświetlaczy TFT, używana zamiast Adafruit ST7735 i GFX.
+  Upewnij się że masz poprawnie skonfigurowaną bibliotekę! Pobierz plik User_Setup.h i podmień go z plikiem User_Setup.h który znajduje się w bibliotecę TFT_eSPI.
   
   **Biblioteka TFT_eSPI jest używana w tym projekcie zgodnie z licencją MIT.
   Pełna treść licencji dostępna jest w repozytorium autora!**
@@ -237,7 +238,8 @@ Oznacza to, że:
 ## Przykład prawidłowego oznaczenia autora
 
 > Na podstawie projektu autorstwa Mateusza Lademanna (InGraw Co.)  
-> Źródło: https://github.com/InGraw-Co/InConsoleLib  
+> Źródło: [https://github.com/InGraw-Co/InConsoleLib  ](https://github.com/InGraw-Co/InConsoleLib)
+> 
 > Licencja: CC BY-NC 4.0
 
 ---
