@@ -175,6 +175,70 @@ Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc poniżej znajdziesz s
 - Kolory i pozycje miej na uwadze względem rozdzielczości 128x160 px.
 - Optymalizuj rysowanie, minimalizując niepotrzebne czyszczenia i rysowanie dużych elementów na nowo.
 
+---
+
+## 💾 Korzystanie z karty SD (SPI)
+
+InConsoleLib obsługuje kartę SD przez interfejs SPI, umożliwiając zapisywanie i odczytywanie danych, np. wyników, zapisów gier czy ustawień.
+
+### 📁 Tworzenie, odczyt, zapis i usuwanie plików
+
+| Funkcja                                | Opis                                                  |
+|----------------------------------------|-------------------------------------------------------|
+| `File file = SD.open("/plik.txt")`     | Otwiera plik do odczytu                               |
+| `File file = SD.open("/plik.txt", FILE_WRITE)` | Otwiera plik do zapisu (tworzy, jeśli nie istnieje) |
+| `file.println("tekst")`                | Zapisuje linię tekstu do otwartego pliku             |
+| `file.read()`, `file.parseInt()`       | Czyta dane z otwartego pliku                         |
+| `file.close()`                         | Zamyka otwarty plik (zawsze wymagane!)              |
+| `SD.exists("/plik.txt")`               | Sprawdza, czy plik istnieje                         |
+| `SD.remove("/plik.txt")`               | Usuwa wskazany plik                                 |
+
+---
+
+### 📜 Odczyt danych z pliku
+
+```cpp
+File file = SD.open("/save.txt");
+if (file) {
+  int value = file.parseInt(); // Odczytuje liczbę z pliku
+  file.close();
+}
+```
+
+---
+
+### 💾 Zapis danych do pliku
+
+```cpp
+File file = SD.open("/save.txt", FILE_WRITE);
+if (file) {
+  file.println(123); // Zapisuje liczbę do pliku
+  file.close();
+}
+```
+
+---
+
+### 🧹 Usuwanie pliku
+
+```cpp
+if (SD.exists("/save.txt")) {
+  SD.remove("/save.txt"); // Usuwa plik
+}
+```
+
+---
+
+### 📌 Zasady i dobre praktyki
+
+- **Ścieżki** zawsze zaczynają się od `/`, np. `"/highscore.txt"`
+- System plików: FAT16 / FAT32
+- Zawsze **zamykaj plik** po odczycie/zapisie (`file.close()`)
+- Nie otwieraj/zamykaj plików zbyt często w `loop()` — oszczędzaj RAM i cykle
+- Pliki są przechowywane na karcie SD w głównym katalogu
+
+---
+
 ## 💡 Przykładowe użycie
 
 ```cpp
