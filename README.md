@@ -24,10 +24,9 @@ Przed użyciem `InConsoleLib` musisz mieć zainstalowane:
 - **TFT_eSPI**  
   https://github.com/Bodmer/TFT_eSPI  
   Wydajna biblioteka graficzna dla wyświetlaczy TFT, używana zamiast Adafruit ST7735 i GFX.
-  Upewnij się że masz poprawnie skonfigurowaną bibliotekę! Pobierz plik User_Setup.h i podmień go z plikiem User_Setup.h który znajduje się w bibliotecę TFT_eSPI.
+  W celu poprawnego działania należy samodzielnie pobrać i zainstalować TFT_eSPI, a następnie zastąpić plik `User_setup.h` dostarczony w tym projekcie.
   
-  **Biblioteka TFT_eSPI jest używana w tym projekcie zgodnie z licencją MIT.
-  Pełna treść licencji dostępna jest w repozytorium autora!**
+  **Uwaga:** Biblioteka TFT_eSPI pozostaje własnością oryginalnego autora! Proszę zapoznać się z warunkami licencji tej biblioteki w jej repozytorium.
 
 - Upewnij się również, że masz zainstalowaną platformę **esp32** w preferencjach Arduino IDE:
   https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
