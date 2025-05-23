@@ -155,15 +155,15 @@ Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc poniżej znajdziesz s
 
 - Szybkie czyszczenie:
   ```cpp
-  ic.tft.fillScreen(TFT_BLACK);
+  ic.tft.fillScreen(TFT_BLACK); // czyszczenie
   ```
 
 ### Włączenie/Wyłącznie
 
 - Wyłączenie lub włączenie wyświetlania (np. do oszczędzania energii):
   ```cpp
-  ic.tft.writecommand(TFT_DISPOFF);  // ekran off
-  ic.tft.writecommand(TFT_DISPON);   // ekran on
+  ic.tft.writecommand(TFT_DISPOFF);  // ekran wyłączony
+  ic.tft.writecommand(TFT_DISPON);   // ekran włączony
 
   ```
 
