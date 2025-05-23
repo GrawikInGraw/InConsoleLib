@@ -187,12 +187,13 @@ void loop() {
 
 ## 📚 Instalacja
 
-1. Pobierz bibliotekę `InConsoleLib` i umieść folder w `Arduino/libraries`.
-2. Zainstaluj wymagane bibliotekę **TFT_eSPI** przez Menadżera bibliotek Arduino.
-3. 
-4. Upewnij się, że masz zainstalowaną platformę ESP32 (esp32/arduino).
-5. Uruchom ponownie Arduino IDE.
-6. Podłącz ESP32 i skompiluj swoje projekty z `#include "ic.h"`.
+1. Zainstaluj środowisko `Arduino IDE`.
+2. Pobierz bibliotekę `InConsoleLib` i umieść folder w `Arduino/libraries`.
+3. Zainstaluj wymagane bibliotekę **TFT_eSPI** przez Menadżera bibliotek Arduino.
+4. Zastąpi plik `User_setup.h` znajdujący się w `Adruino/libraries/TFT_eSPI` na ten dostarczony w tym projekcie.
+5. Upewnij się, że masz zainstalowaną platformę ESP32 (esp32/arduino).
+6. Uruchom ponownie Arduino IDE.
+7. Podłącz ESP32 i skompiluj swoje projekty.
 
 ---
 
@@ -203,9 +204,9 @@ void loop() {
   - SD używa VSPI (piny 23/19/18/5)  
   To jest kluczowe, bo mieszanie może powodować błędy komunikacji.
 
-- **Przyciski:** Są podciągnięte wewnętrznie (INPUT_PULLUP) – stan niskiego logicznego oznacza naciśnięcie.
+- **Przyciski:** Są podciągnięte wewnętrznie (INPUT_PULLUP) – stan niski oznacza naciśnięcie.
 
-- **Buzzer:** prosty on/off na pin 33. Możesz rozbudować o PWM jeśli chcesz.
+- **Buzzer:** prosty on/off na pin 33 sterowany tranzystorem.
 
 - **Wyświetlacz:** Ustawiony na rotację 3, by obraz był dobrze orientowany względem fizycznego montażu.
 
