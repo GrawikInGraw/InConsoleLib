@@ -1,0 +1,33 @@
+Copyright (c) 2024 Mateusz Lademann (InGraw Co.)
+
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).
+
+You are free to:
+- Share — copy and redistribute the material in any medium or format.
+- Adapt — remix, transform, and build upon the material.
+
+Under the following terms:
+- Attribution — You must give appropriate credit to the original author: Mateusz Lademann (InGraw Co.).
+- NonCommercial — You may not use the material for commercial purposes.
+
+For the full license text, see:
+https://creativecommons.org/licenses/by-nc/4.0/
+
+Example of proper attribution:
+"Based on a project by Mateusz Lademann (InGraw Co.) — https://github.com/InGraw-Co/InConsoleLib — Licensed under CC BY-NC 4.0."
+
+---
+
+NOTICE: This project uses the TFT_eSPI library by Bodmer, which is licensed under the MIT and FreeBSD Licenses.
+You are required to install the TFT_eSPI library separately from:
+https://github.com/Bodmer/TFT_eSPI
+
+You must comply with the license terms of that library. The configuration file provided (`User_Setup.h`) is an example intended for integration and does not include any original source code from TFT_eSPI.
+
+TFT_eSPI is licensed under:
+- MIT License (for core files),
+- BSD License (for some functions derived from Adafruit_GFX),
+- FreeBSD License (for original work by Bodmer).
+
+See the TFT_eSPI repository for full license details:
+https://github.com/Bodmer/TFT_eSPI
