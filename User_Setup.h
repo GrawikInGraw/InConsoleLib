@@ -1,3 +1,5 @@
+//InConsole V1.2 TFT_eSPI Konfiguracja - Proszę wkleić w zainstalowaną bibliotekę!
+
 #define USER_SETUP_ID 32
 
 #define ST7735_DRIVER
