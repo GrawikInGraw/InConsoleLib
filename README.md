@@ -215,8 +215,7 @@ void loop() {
 
 ## 👨‍💻 Autor i rozwój
 
-Mateusz Lademann (Mati) – twórca InGraw Co. i InConsole.  
-Projektuj z głową, ucz się na błędach i buduj przyszłość z InConsole!  
+Mateusz Lademann (InGraw Co.) 
 
 ---
 
