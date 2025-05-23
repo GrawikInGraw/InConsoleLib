@@ -114,43 +114,57 @@ SD działa na SPI VSPI z pinami:
 
 ## 🎨 Korzystanie z TFT_eSPI w InConsoleLib
 
-Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc skupimy się na tym, jak efektywnie korzystać z podstawowych funkcji rysowania i wyświetlania tekstu, które da Ci TFT_eSPI.
+Twoja biblioteka już inicjalizuje wyświetlacz TFT, więc poniżej znajdziesz skróconą dokumentację najczęściej używanych funkcji z biblioteki TFT_eSPI, które pozwolą Ci tworzyć GUI, teksty i kształty graficzne na ekranie.
 
 ### Kolory
 
-- Używaj 16-bitowych kolorów w formacie RGB565, np.:
-  - `ST77XX_BLACK` — czarny (tło domyślne)
-  - `ST77XX_WHITE` — biały (tekst, elementy)
-  - `ST77XX_RED`, `ST77XX_GREEN`, `ST77XX_BLUE` — podstawowe kolory
-  - Możesz tworzyć własne kolory przez kombinację RGB, np. `ic.tft.color565(255, 100, 0)`
+- Gotowe kolory znajdziesz np. w `TFT_BLACK`, `TFT_WHITE`, `TFT_RED`, `TFT_GREEN`, `TFT_BLUE`, `TFT_YELLOW`, itd.
+- Własne kolory:
+  ```cpp
+  uint16_t kolor = ic.tft.color565(255, 128, 0); // RGB → pomarańczowy
 
 ### Tekst
 
 - Funkcje do wyświetlania tekstu:
   ```cpp
-  ic.tft.setCursor(x, y);         // ustawia pozycję tekstu (piksele)
-  ic.tft.setTextColor(color);     // ustawia kolor tekstu (opcjonalnie z tłem)
-  ic.tft.setTextSize(size);       // skaluje rozmiar czcionki (1..n)
-  ic.tft.print("Twój tekst");     // rysuje tekst na ekranie
+  ic.tft.setTextColor(TFT_WHITE, TFT_BLACK); // kolor tekstu i tła (tło opcjonalne)
+  ic.tft.setTextSize(2);                     // skalowanie czcionki (1 = normalny rozmiar)
+  ic.tft.setCursor(10, 20);                  // ustaw pozycję x, y (piksele)
+  ic.tft.print("Witaj!");                    // wypisz tekst
+
   ```
 - Pamiętaj, że tekst jest rysowany od aktualnej pozycji kursora.
+- Domyślna czcionka to GLCD (5x7). Możesz ładować większe fonty, np. `ic.tft.setFreeFont(FSS12);`.
 
 ### Rysowanie kształtów
 
 - Linie i kształty do szybkiego GUI:
   ```cpp
-  ic.tft.drawLine(x0, y0, x1, y1, color);          // linia
-  ic.tft.drawRect(x, y, width, height, color);     // prostokąt
-  ic.tft.fillRect(x, y, width, height, color);     // wypełniony prostokąt
-  ic.tft.drawCircle(x, y, r, color);                // okrąg
-  ic.tft.fillCircle(x, y, r, color);                // wypełniony okrąg
+  ic.tft.drawPixel(x, y, TFT_WHITE); // Jeden pixel
+  ic.tft.drawLine(x0, y0, x1, y1, TFT_BLUE); // Linia
+  ic.tft.drawRect(x, y, w, h, TFT_GREEN); // Prostokąt
+  ic.tft.fillRect(x, y, w, h, TFT_RED); // Wypełniony Prostokąt
+  ic.tft.drawCircle(x, y, r, TFT_YELLOW); // Okrąg
+  ic.tft.fillCircle(x, y, r, TFT_CYAN); // Wypełniony Okrąg
+  ic.tft.drawRoundRect(x, y, w, h, radius, TFT_ORANGE); // Zaokrąglony Prostokąc
+  ic.tft.fillRoundRect(x, y, w, h, radius, TFT_MAGENTA); // Wypełniony Zaokrąglony Prostokąt
+
   ```
   
 ### Czyszczenie ekranu
 
 - Szybkie czyszczenie:
   ```cpp
-  ic.tft.fillScreen(ST77XX_BLACK);
+  ic.tft.fillScreen(TFT_BLACK);
+  ```
+
+### Włączenie/Wyłącznie
+
+- Wyłączenie lub włączenie wyświetlania (np. do oszczędzania energii):
+  ```cpp
+  ic.tft.writecommand(TFT_DISPOFF);  // ekran off
+  ic.tft.writecommand(TFT_DISPON);   // ekran on
+
   ```
 
 ---
