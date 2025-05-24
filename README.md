@@ -65,6 +65,20 @@ bool readSelect();      // przycisk Select
 
 ---
 
+Dodatkowo dostępne są funkcje zwracające `true` **dopóki przycisk jest wciśnięty** (czyli trzymają stan przytrzymania):
+
+```cpp
+bool pressedButtonA();  // przycisk A - zwraca true, gdy jest wciśnięty
+bool pressedButtonB();  // przycisk B - zwraca true, gdy jest wciśnięty
+bool pressedStart();    // przycisk Start - zwraca true, gdy jest wciśnięty
+bool pressedSelect();   // przycisk Select - zwraca true, gdy jest wciśnięty
+```
+
+**Uwaga:** Te funkcje zwracają `true` tak długo, jak przycisk jest fizycznie wciśnięty, a nie tylko przy pojedynczym naciśnięciu.
+
+---
+
+
 ### 3. Buzzer
 
 Prosta funkcja beep:
